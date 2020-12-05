@@ -4,11 +4,8 @@
 #define RXPIN 2
 #define TXPIN 3
 
-//Maximum size of char array that is sent
-//This is the maximum size of an array I
-//can make without a compiler error (2^15 -1)
-//#define TEST_SIZE 100
 #define TEST_SIZE 300
+#define STEP_SIZE 1
 
 SoftwareSerial serialConnection(RXPIN, TXPIN);
 
@@ -25,9 +22,8 @@ void setup(){
 void loop(){
   if(serialConnection.available() > 0){
       inChar = serialConnection.read();//Read one byte
-      if(inChar == 's'){
-        bt_test();
-      }
+      Serial.println(inChar);
+      bt_test();
     }
 }
 
@@ -49,14 +45,14 @@ void bt_test(){
 
   //Sends message of increasing size
   //places null character at end
-  for(i = 1; i < TEST_SIZE; i++){
+  for(i = 1; i < TEST_SIZE; i += STEP_SIZE){
     //set the null character for size
     temp = message[i];
     message[i] = '\0';
 
     serialConnection.print(message);
+    Serial.println(message);
     serialConnection.print('x');
-
     message[i] = temp;
   }
   serialConnection.print('d');
