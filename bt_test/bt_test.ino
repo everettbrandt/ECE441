@@ -7,7 +7,7 @@
 //Maximum size of char array that is sent
 //This is the maximum size of an array I
 //can make without a compiler error (2^15 -1)
-//#define TEST_SIZE 30000
+//#define TEST_SIZE 100
 #define TEST_SIZE 300
 
 SoftwareSerial serialConnection(RXPIN, TXPIN);
@@ -23,16 +23,16 @@ void setup(){
 }
 
 void loop(){
-  char message [TEST_SIZE];
   if(serialConnection.available() > 0){
       inChar = serialConnection.read();//Read one byte
       if(inChar == 's'){
-        bt_test(message);
+        bt_test();
       }
     }
 }
 
-void bt_test(char * message){
+void bt_test(){
+  char message [TEST_SIZE];
   unsigned int i;
   char size_message[6];
   char temp;
