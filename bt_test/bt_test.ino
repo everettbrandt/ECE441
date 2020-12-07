@@ -4,7 +4,7 @@
 #define RXPIN 2
 #define TXPIN 3
 
-#define TEST_SIZE 300
+#define TEST_SIZE 200
 #define STEP_SIZE 1
 
 SoftwareSerial serialConnection(RXPIN, TXPIN);
@@ -51,7 +51,6 @@ void bt_test(){
     message[i] = '\0';
 
     serialConnection.print(message);
-    Serial.println(message);
     serialConnection.print('x');
     message[i] = temp;
   }
